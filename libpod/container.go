@@ -20,6 +20,7 @@ import (
 	"github.com/containers/podman/v5/libpod/define"
 	"github.com/containers/podman/v5/libpod/lock"
 	"github.com/containers/storage"
+	"github.com/containers/storage/pkg/regexp"
 	spec "github.com/opencontainers/runtime-spec/specs-go"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sys/unix"
@@ -667,7 +668,7 @@ func (c *Container) RuntimeName() string {
 // Unlocked
 
 // Hostname gets the container's hostname
-func (c *Container) Hostname() string {
+func (c *Container) ConfiguredHostname() string {
 	if c.config.UTSNsCtr != "" {
 		utsNsCtr, err := c.runtime.GetContainer(c.config.UTSNsCtr)
 		if err != nil {
@@ -680,6 +681,18 @@ func (c *Container) Hostname() string {
 	if c.config.Spec.Hostname != "" {
 		return c.config.Spec.Hostname
 	}
+	return ""
+}
+
+// Characters valid in a hostname are in the set [0-9a-zA-Z.-]
+var invalidHostnameCharacters = regexp.Delayed("[^0-9a-zA-Z.-]")
+
+// Hostname gets the container's hostname
+func (c *Container) Hostname() string {
+	hostname := c.ConfiguredHostname()
+	if hostname != "" {
+		return hostname
+	}
 
 	// if the container is not running in a private UTS namespace,
 	// return the host's hostname.
@@ -690,6 +703,51 @@ func (c *Container) Hostname() string {
 			return hostname
 		}
 	}
+
+	// If use_container_name_as_hostname is set in the CONTAINERS table in containers.conf
+	// use a sanitized version of the container's name as the hostname.
+	if c.runtime.config.Containers.UseContainerNameAsHostName {
+		sanitizedHostname := invalidHostnameCharacters.ReplaceAllString(c.Name(), "")
+		return sanitizedHostname
+	}
+
+	// Otherwise use the container's short ID as the hostname.
+	if len(c.ID()) < 11 {
+		return c.ID()
+	}
+	return c.ID()[:12]
+}
+
+// If the container isn't running in a private UTS namespace, Hostname()
+// will return the host's hostname as the container's hostname. If netavark
+// were to try and obtain a DHCP lease with the host's hostname in an environment
+// where DDNS was active, bad things could happen. NetworkHostname() on the
+// other hand, will return an empty string if the container isn't running
+// in a private UTS namespace.
+//
+// This function should only be used to populate the ContainerHostname member
+// of the common.libnetwork.types.NetworkOptions struct.
+func (c *Container) NetworkHostname() string {
+	hostname := c.ConfiguredHostname()
+	if hostname != "" {
+		return hostname
+	}
+
+	// if the container is not running in a private UTS namespace,
+	// return an empty string.
+	privateUTS := c.hasPrivateUTS()
+	if !privateUTS {
+		return ""
+	}
+
+	// If use_container_name_as_hostname is set in the CONTAINERS table in containers.conf
+	// use a sanitized version of the container's name as the hostname.
+	if c.runtime.config.Containers.UseContainerNameAsHostName {
+		sanitizedHostname := invalidHostnameCharacters.ReplaceAllString(c.Name(), "")
+		return sanitizedHostname
+	}
+
+	// Otherwise use the container's short ID as the hostname.
 	if len(c.ID()) < 11 {
 		return c.ID()
 	}
