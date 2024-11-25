@@ -81,8 +81,6 @@ github.com/containernetworking/plugins v1.5.1 h1:T5ji+LPYjjgW0QM+KyrigZbLsZ8jaX+
 github.com/containernetworking/plugins v1.5.1/go.mod h1:MIQfgMayGuHYs0XdNudf31cLLAC+i242hNm6KuDGqCM=
 github.com/containers/buildah v1.38.1-0.20241119213149-52437ef15d33 h1:Ih6KuyByK7ZGGzkS0M5rVBPLWIyeDvdL5klhsKBo8vA=
 github.com/containers/buildah v1.38.1-0.20241119213149-52437ef15d33/go.mod h1:RxIuKhwTpRl3ma4d4BF6QzSSeg9zNNvo/xhYJOKeDQs=
-github.com/containers/common v0.61.1-0.20241125104856-ceceb404e9aa h1:XetqxHBrm3klRHIe8L1QIOr57B0HUVdihxY1wop0KXg=
-github.com/containers/common v0.61.1-0.20241125104856-ceceb404e9aa/go.mod h1:3mUU2/PxkOwvL46fmaRVj0YfBDBxNPOMctIvBHWo4Ak=
 github.com/containers/conmon v2.0.20+incompatible h1:YbCVSFSCqFjjVwHTPINGdMX1F6JXHGTUje2ZYobNrkg=
 github.com/containers/conmon v2.0.20+incompatible/go.mod h1:hgwZ2mtuDrppv78a/cOBNiCm6O0UMWGx1mu7P00nu5I=
 github.com/containers/gvisor-tap-vsock v0.8.0 h1:Z8ZEWb+Lio0d+lXexONdUWT4rm9lF91vH0g3ARnMy7o=
@@ -275,6 +273,8 @@ github.com/gorilla/schema v1.4.1 h1:jUg5hUjCSDZpNGLuXQOgIWGdlgrIdYvgQ0wZtdK1M3E=
 github.com/gorilla/schema v1.4.1/go.mod h1:Dg5SSm5PV60mhF2NFaTV1xuYYj8tV8NOPRo4FggUMnM=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0 h1:asbCHRVmodnJTuQ3qamDwqVOIjwqUPTYmYuemVOx+Ys=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0/go.mod h1:ggCgvZ2r7uOoQjOyu2Y1NhHmEPPzzuhWgcza5M1Ji1I=
+github.com/gtjoseph/common v0.0.0-20241125154636-31b6f9e9f225 h1:0McC2EJWEmOkrbuzNpFSfTmuJmvqtmJXmUXV4iKbrcY=
+github.com/gtjoseph/common v0.0.0-20241125154636-31b6f9e9f225/go.mod h1:NGRISq2vTFPSbhNqj6MLwyes4tWSlCnqbJg7R77B8xc=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/errwrap v1.1.0 h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY2I=
 github.com/hashicorp/errwrap v1.1.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=

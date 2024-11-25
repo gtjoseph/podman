@@ -231,6 +231,9 @@ type ContainersConfig struct {
 	// Umask is the umask inside the container.
 	Umask string `toml:"umask,omitempty"`
 
+	// Use the container's name as default hostname instead of ID.
+	UseContainerNameAsHostName bool `toml:"use_container_name_as_hostname,omitempty"`
+
 	// UTSNS indicates how to create a UTS namespace for the container
 	UTSNS string `toml:"utsns,omitempty"`
 
