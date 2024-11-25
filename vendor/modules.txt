@@ -178,7 +178,7 @@ github.com/containers/buildah/pkg/sshagent
 github.com/containers/buildah/pkg/util
 github.com/containers/buildah/pkg/volumes
 github.com/containers/buildah/util
-# github.com/containers/common v0.61.1-0.20241125172552-a801fac4edc0
+# github.com/containers/common v0.61.1-0.20241125172552-a801fac4edc0 => github.com/gtjoseph/common v0.0.0-20241128203536-2a3e1c1d0ac4
 ## explicit; go 1.22.6
 github.com/containers/common/internal
 github.com/containers/common/internal/attributedstring
@@ -1398,3 +1398,4 @@ tags.cncf.io/container-device-interface/pkg/parser
 # tags.cncf.io/container-device-interface/specs-go v0.8.0
 ## explicit; go 1.19
 tags.cncf.io/container-device-interface/specs-go
+# github.com/containers/common => github.com/gtjoseph/common v0.0.0-20241128203536-2a3e1c1d0ac4
